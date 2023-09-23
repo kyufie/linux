@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 
 #include "qcom-msm8226.dtsi"
+#include "qcom-pm8226.dtsi"
 
 / {
 	model = "Sony Xperia E3 (D2202)";
@@ -28,6 +29,29 @@
 
 &smem_region {
   reg = <0x0fa00000 0x100000>;
+};
+
+&smbb {
+	usb-charge-current-limit = <1500000>;
+	qcom,fast-charge-safe-current = <1500000>;
+	qcom,fast-charge-current-limit = <1500000>;
+	qcom,fast-charge-safe-voltage = <4380000>;
+	qcom,fast-charge-high-threshold-voltage = <4350000>;
+	qcom,auto-recharge-threshold-voltage = <4240000>;
+	qcom,minimum-input-voltage = <4300000>;
+};
+
+&usb {
+	status = "okay";
+
+	extcon = <&smbb>;
+	vbus-supply = <&chg_otg>;
+};
+
+&usb_hs_phy {
+	extcon = <&smbb>;
+	v1p8-supply = <&pm8226_l10>;
+	v3p3-supply = <&pm8226_l20>;
 };
 
 &rpm_requests {
