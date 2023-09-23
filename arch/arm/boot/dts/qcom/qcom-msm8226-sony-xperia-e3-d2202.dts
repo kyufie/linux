@@ -22,6 +22,10 @@
 	status = "okay";
 };
 
+&sdhc_1 {
+  status = "okay";
+};
+
 &smem_region {
   reg = <0x0fa00000 0x100000>;
 };
