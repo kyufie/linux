@@ -37,7 +37,7 @@
 &tlmm {
 	gpio_keys_pin_a: gpio-keys-active-state {
 		pins = "gpio106";
-		function = "normal";
+		function = "gpio";
 
 		bias-pull-up;
 	};
