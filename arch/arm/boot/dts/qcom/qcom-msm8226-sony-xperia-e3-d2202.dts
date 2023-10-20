@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 
+#include <dt-bindings/gpio/gpio.h>
+
 #include "qcom-msm8226.dtsi"
 #include "qcom-pm8226.dtsi"
 
@@ -17,6 +19,35 @@
 		       0xde 0x20000
 		       0xdf 0x20000>;
 	qcom,board-id = <0x08 0x00>;
+
+	gpio-keys {
+		compatible = "gpio-keys";
+
+		pinctrl-names = "default";
+		pinctrl-0 = <&gpio_keys_pin_a>;
+
+		key-volume-down {
+			gpios = <&tlmm 106 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_VOLUMEDOWN>;
+			wakeup-source;
+		};
+	};
+};
+
+&tlmm {
+	gpio_keys_pin_a: gpio-keys-active-state {
+		pins = "gpio106";
+		function = "normal";
+
+		bias-pull-up;
+	};
+};
+
+&pm8226_resin {
+	status = "okay";
+
+	linux,code = <KEY_VOLUMEUP>;
+	wakeup-source;
 };
 
 &blsp1_uart3 {
